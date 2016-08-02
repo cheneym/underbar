@@ -122,8 +122,12 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     let result = [];
+    
+    _.each(collection, function(entry) {
+      result.push(iterator(entry));
+    });
 
-
+    return result;
   };
 
   /*
