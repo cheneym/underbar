@@ -80,12 +80,12 @@
   _.filter = function(collection, test) {
     var result = [];
 
-    _.each(collection, function(elem) {
-      if (test(elem)) {
-        result.push(elem);
+    _.each(collection, function(entry) {
+      if (test(entry)) {
+        result.push(entry);
       }
     });
-    
+
     return result;
   };
 
@@ -93,6 +93,11 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+
+    return _.filter(collection, function(entry) {
+      return !test(entry);
+    });
+
   };
 
   // Produce a duplicate-free version of the array.
