@@ -102,6 +102,17 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    let map = {};
+    let result = [];
+
+    _.each(array, function(entry) {
+      if (!map[entry]) {
+        map[entry] = 1;
+        result.push(entry);
+      }
+    });
+    
+    return result;
   };
 
 
