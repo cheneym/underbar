@@ -78,7 +78,7 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
-    var result = [];
+    let result = [];
 
     _.each(collection, function(entry) {
       if (test(entry)) {
@@ -111,7 +111,7 @@
         result.push(entry);
       }
     });
-    
+
     return result;
   };
 
@@ -121,6 +121,9 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    let result = [];
+
+
   };
 
   /*
