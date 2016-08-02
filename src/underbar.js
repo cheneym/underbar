@@ -80,9 +80,9 @@
   _.filter = function(collection, test) {
     let result = [];
 
-    _.each(collection, function(entry) {
-      if (test(entry)) {
-        result.push(entry);
+    _.each(collection, function(item) {
+      if (test(item)) {
+        result.push(item);
       }
     });
 
@@ -94,8 +94,8 @@
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
 
-    return _.filter(collection, function(entry) {
-      return !test(entry);
+    return _.filter(collection, function(item) {
+      return !test(item);
     });
 
   };
@@ -105,10 +105,10 @@
     let map = {};
     let result = [];
 
-    _.each(array, function(entry) {
-      if (!map[entry]) {
-        map[entry] = 1;
-        result.push(entry);
+    _.each(array, function(item) {
+      if (!map[item]) {
+        map[item] = 1;
+        result.push(item);
       }
     });
 
@@ -123,8 +123,8 @@
     // the members, it also maintains an array of results.
     let result = [];
     
-    _.each(collection, function(entry) {
-      result.push(iterator(entry));
+    _.each(collection, function(item) {
+      result.push(iterator(item));
     });
 
     return result;
