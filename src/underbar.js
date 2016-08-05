@@ -388,7 +388,7 @@
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
     let result = [];
-    
+
     let longestLen = _.reduce(arguments, function(maxLen, item) {
       if (item.length > maxLen) {
         return item.length;
@@ -403,6 +403,7 @@
         }
         zippedArr[i].push(arg[i]);
       }
+
       return zippedArr;
     }, []);
   };
@@ -417,6 +418,29 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    let result = [];
+    let argLen = arguments.length;
+
+    let map = _.reduce(arguments, function(map, arg) {
+      _.each(arg, function(item) {
+        let key = JSON.stringify(item);
+        if (map[key] === undefined) {
+          map[key] = 1;
+        } else {
+          map[key]++;
+        }
+      });
+      return map;
+    }, {});
+
+    _.each(map, function(item, prop) {
+      if (item === argLen) {
+        result.push(JSON.parse(prop));
+      }
+    });
+
+
+    return result;
   };
 
   // Take the difference between one array and a number of other arrays.
