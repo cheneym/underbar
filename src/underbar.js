@@ -177,8 +177,8 @@
       col = collection.slice(1, collection.length);
     }
 
-    _.each(col, function(item) {
-      acc = iterator(acc, item);
+    _.each(col, function(item, index, array) {
+      acc = iterator(acc, item, index, array);
     });
 
     return acc;
@@ -204,8 +204,8 @@
       iterator = _.identity; 
     }
     
-    return _.reduce(collection, function(allPassed, item) {
-      return allPassed && !!iterator(item);
+    return _.reduce(collection, function(allPassed, item, index, array) {
+      return allPassed && !!iterator(item, index, array);
     }, true);
   };
 
@@ -217,8 +217,8 @@
       iterator = _.identity; 
     }
 
-    return !_.every(collection, function(item) {
-      return !iterator(item);
+    return !_.every(collection, function(item, index, array) {
+      return !iterator(item, index, array);
     });
   };
 
