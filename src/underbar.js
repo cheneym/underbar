@@ -80,8 +80,8 @@
   _.filter = function(collection, test) {
     let result = [];
 
-    _.each(collection, function(item) {
-      if (test(item)) {
+    _.each(collection, function(item, index, array) {
+      if (test(item, index, array)) {
         result.push(item);
       }
     });
@@ -94,8 +94,8 @@
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
 
-    return _.filter(collection, function(item) {
-      return !test(item);
+    return _.filter(collection, function(item, index, array) {
+      return !test(item, index, array);
     });
 
   };
@@ -123,8 +123,8 @@
     // the members, it also maintains an array of results.
     let result = [];
     
-    _.each(collection, function(item) {
-      result.push(iterator(item));
+    _.each(collection, function(item, index, array) {
+      result.push(iterator(item, index, array));
     });
 
     return result;
