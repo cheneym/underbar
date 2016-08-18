@@ -479,7 +479,6 @@
       }
     });
 
-
     return result;
   };
 
@@ -517,6 +516,16 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    let calledInWindow = false;
 
+    return function() {
+      if (!calledInWindow) {
+        func();
+        calledInWindow = true;
+        setTimeout(function() {
+          calledInWindow = false;
+        }, wait);
+      }
+    };
   };
 }());
