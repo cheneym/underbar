@@ -441,16 +441,16 @@
   _.flatten = function(nestedArray, result) {
     result = [];
 
-    for (let i = 0; i < nestedArray.length; i++) {
-      if (Array.isArray(nestedArray[i])) {
-        let partialResult = _.flatten(nestedArray[i]);
-        for (let j = 0; j < partialResult.length; j++) {
-          result.push(partialResult[j]);
-        }
+    _.each(nestedArray, function(item) {
+      if (Array.isArray(item)) {
+        let partialResult = _.flatten(item);
+        _.each(partialResult, function(item) {
+          result.push(item);
+        });
       } else {
-        result.push(nestedArray[i]);
+        result.push(item);
       }
-    }
+    });
 
     return result;
   };
