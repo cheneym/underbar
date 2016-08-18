@@ -486,26 +486,27 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
-    let map = {};
     let result = [];
 
-    for (let i = 0; i < array.length; i++) {
-      let key = JSON.stringify(array[i]);
+    let map = _.reduce(array, function(map, item) {
+      let key = JSON.stringify(item);
       map[key] = 1;
-    }
+      return map;
+    }, {});
 
     for (let i = 1; i < arguments.length; i++) {
-      for (let j = 0; j < arguments[i].length; j++) {
-        let key = JSON.stringify(arguments[i][j]);
+      map = _.reduce(arguments[i], function(map, item) {
+        let key = JSON.stringify(item);
         if (map[key] !== undefined) {
           delete map[key];
         }
-      }  
+        return map;
+      }, map);
     }
 
-    for (let prop in map) {
+    _.each(map, function(item, prop) {
       result.push(JSON.parse(prop));
-    }
+    });
 
     return result;
   };
@@ -516,5 +517,6 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+
   };
 }());
