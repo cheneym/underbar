@@ -440,7 +440,7 @@
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
     result = [];
-    
+
     for (let i = 0; i < nestedArray.length; i++) {
       if (Array.isArray(nestedArray[i])) {
         let partialResult = _.flatten(nestedArray[i]);
@@ -486,6 +486,28 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    let map = {};
+    let result = [];
+
+    for (let i = 0; i < array.length; i++) {
+      let key = JSON.stringify(array[i]);
+      map[key] = 1;
+    }
+
+    for (let i = 1; i < arguments.length; i++) {
+      for (let j = 0; j < arguments[i].length; j++) {
+        let key = JSON.stringify(arguments[i][j]);
+        if (map[key] !== undefined) {
+          delete map[key];
+        }
+      }  
+    }
+
+    for (let prop in map) {
+      result.push(JSON.parse(prop));
+    }
+
+    return result;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
